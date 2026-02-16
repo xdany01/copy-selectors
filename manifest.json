@@ -1,0 +1,40 @@
+{
+    "manifest_version": 3,
+    "name": "Copy Selector",
+    "version": "1.0",
+    "description": "Copia selectores CSS completos desde el main hasta el elemento objetivo con opciones personalizables.",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "icons": {
+        "16": "images/icon.png",
+        "48": "images/icon.png",
+        "128": "images/icon.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/icon.png",
+            "48": "images/icon.png",
+            "128": "images/icon.png"
+        }
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "styles.css"
+            ]
+        }
+    ]
+}

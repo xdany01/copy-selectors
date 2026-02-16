@@ -1,0 +1,104 @@
+.selector-copy-highlight {
+    position: relative;
+    outline: 2px solid #3B82F6 !important;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), 0 0 20px rgba(59, 130, 246, 0.3) !important;
+    background-color: rgba(59, 130, 246, 0.05) !important;
+    cursor: crosshair !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 99998;
+}
+
+.selector-copy-copied {
+    outline: 2px solid #10B981 !important;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1), 0 0 25px rgba(16, 185, 129, 0.5) !important;
+    background-color: rgba(16, 185, 129, 0.1) !important;
+    transform: scale(1.002);
+}
+
+/* Preview del selector */
+#selector-copy-preview {
+    position: fixed;
+    z-index: 99999;
+    display: none;
+    max-width: 500px;
+    padding: 8px 12px;
+    
+    background: rgba(30, 30, 46, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-left: 3px solid #3B82F6;
+    border-radius: 6px;
+    
+    color: #E5E7EB;
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+/* Toast de notificación */
+#selector-copy-toast {
+    position: fixed;
+    z-index: 2147483647;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%) translateY(20px);
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 280px;
+    padding: 14px 18px;
+
+    background: rgba(30, 30, 46, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid #3B82F6;
+    border-radius: 10px;
+
+    color: #fff;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 8px 12px -6px rgba(0, 0, 0, 0.5);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#selector-copy-toast.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+#selector-copy-toast::before {
+    content: "📋";
+    font-size: 18px;
+}
+
+#selector-copy-toast.error {
+    border-left-color: #EF4444;
+}
+
+#selector-copy-toast.error::before {
+    content: "⚠️";
+}
+
+#selector-copy-toast.success {
+    border-left-color: #10B981;
+}
+
+#selector-copy-toast.success::before {
+    content: "✅";
+}

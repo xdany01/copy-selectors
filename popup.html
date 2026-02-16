@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Selector</title>
+    <link rel="stylesheet" href="popup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="card">
+        <header>
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <h1>Copy Selector</h1>
+            </div>
+            <div class="status-badge" id="statusBadge">OFF</div>
+        </header>
+
+        <main>
+            <div class="control-panel">
+                <span class="label">Activación</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleExtension">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="options-section">
+                <h2 class="section-title">Opciones del Selector</h2>
+
+                <div class="option-item">
+                    <div class="option-info">
+                        <span class="option-label">IDs</span>
+                        <span class="option-description">#element-id</span>
+                    </div>
+                    <label class="toggle-switch small">
+                        <input type="checkbox" id="toggleIds" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="option-item">
+                    <div class="option-info">
+                        <span class="option-label">Clases</span>
+                        <span class="option-description">.class-name</span>
+                    </div>
+                    <label class="toggle-switch small">
+                        <input type="checkbox" id="toggleClasses" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="option-item">
+                    <div class="option-info">
+                        <span class="option-label">Atributos</span>
+                        <span class="option-description">[data-*="value"]</span>
+                    </div>
+                    <label class="toggle-switch small">
+                        <input type="checkbox" id="toggleAttributes">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="option-item depth-control">
+                    <div class="option-info">
+                        <span class="option-label">Profundidad</span>
+                        <span class="option-description">Niveles del selector</span>
+                    </div>
+                    <div class="depth-selector">
+                        <button class="depth-btn" id="depthDecrease">-</button>
+                        <span class="depth-value" id="depthValue">10</span>
+                        <button class="depth-btn" id="depthIncrease">+</button>
+                    </div>
+                </div>
+
+                <div class="option-item strategy-control">
+                    <div class="option-info">
+                        <span class="option-label">Estrategia</span>
+                        <span class="option-description">Tipo de selector</span>
+                    </div>
+                    <select id="selectorStrategy" class="strategy-select">
+                        <option value="full" title="Ruta completa con todos los atributos configurados">Completo
+                        </option>
+                        <option value="nth-child" title="Usa nth-child/nth-of-type para posicionamiento">Nth-child
+                        </option>
+                        <option value="optimized" title="Selector único más corto posible">Optimizado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="instructions">
+                <p>Mantén <span class="key">Alt</span> + <span class="mouse">Clic</span> para copiar el selector.</p>
+                <p class="sub-instruction">El selector se genera desde <code>&lt;main&gt;</code> o
+                    <code>&lt;body&gt;</code>
+                </p>
+            </div>
+        </main>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
