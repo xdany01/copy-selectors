@@ -50,12 +50,12 @@ Extensión de Chrome que te permite copiar selectores CSS completos desde el ele
 ### Estrategia: Completo
 Con todas las opciones activadas:
 ```css
-body > main#main-content.container.wrapper > section.hero-section[data-section="intro"] > div.content.text-center
+body > main[id="main-content"][class="container wrapper"] > section[class="hero-section"][data-section="intro"] > div[class="content text-center"]
 ```
 
 Solo con Tags e IDs:
 ```css
-body > main#main-content > section > div
+body > main[id="main-content"] > section > div
 ```
 
 ### Estrategia: Nth-child
@@ -76,7 +76,7 @@ div.unique-class
 
 Con contexto mínimo:
 ```css
-main > section.hero > div:nth-of-type(1)
+main > section[class="hero-section"] > div:nth-of-type(1)
 ```
 
 ## 🛠️ Estructura de Archivos

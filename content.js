@@ -238,7 +238,7 @@ function generateNthChildSelector(element) {
 
         // Agregar ID si existe y está habilitado
         if (includeIds && current.id) {
-            selector += `#${CSS.escape(current.id)}`;
+            selector += `[id="${CSS.escape(current.id)}"]`;
             path.unshift(selector);
             break; // Si tiene ID, no necesitamos más especificidad
         } else {
@@ -262,10 +262,10 @@ function generateNthChildSelector(element) {
                 if (includeClasses && current.classList.length > 0 && !selector.includes(':nth-')) {
                     const classes = Array.from(current.classList)
                         .filter(cls => !cls.startsWith('selector-copy-'))
-                        .map(cls => `.${CSS.escape(cls)}`)
-                        .join('');
+                        .map(cls => `${CSS.escape(cls)}`)
+                        .join(' ');
                     if (classes) {
-                        selector += classes;
+                        selector += `[class="${classes}"]`;
                     }
                 }
             }
@@ -296,7 +296,7 @@ function generateNthChildSelector(element) {
 function generateOptimizedSelector(element) {
     // Estrategia 1: Intentar con ID
     if (element.id) {
-        const idSelector = `#${CSS.escape(element.id)}`;
+        const idSelector = `[id="${CSS.escape(element.id)}"]`;
         if (isUniqueSelector(idSelector)) {
             return idSelector;
         }
@@ -309,7 +309,7 @@ function generateOptimizedSelector(element) {
 
         // Probar cada clase individualmente
         for (const cls of classes) {
-            const classSelector = `${element.tagName.toLowerCase()}.${CSS.escape(cls)}`;
+            const classSelector = `${element.tagName.toLowerCase()}[class="${CSS.escape(cls)}"]`;
             if (isUniqueSelector(classSelector)) {
                 return classSelector;
             }
@@ -317,7 +317,7 @@ function generateOptimizedSelector(element) {
 
         // Probar combinación de todas las clases
         if (classes.length > 1) {
-            const allClassesSelector = `${element.tagName.toLowerCase()}.${classes.map(c => CSS.escape(c)).join('.')}`;
+            const allClassesSelector = `${element.tagName.toLowerCase()}[class="${classes.map(c => CSS.escape(c)).join(' ')}"]`;
             if (isUniqueSelector(allClassesSelector)) {
                 return allClassesSelector;
             }
@@ -357,17 +357,17 @@ function generateSimpleElementSelector(element) {
     let selector = element.tagName.toLowerCase();
 
     if (element.id) {
-        return `${selector}#${CSS.escape(element.id)}`;
+        return `${selector}[id="${CSS.escape(element.id)}"]`;
     }
 
     if (element.classList.length > 0) {
         const classes = Array.from(element.classList)
             .filter(cls => !cls.startsWith('selector-copy-'))
             .slice(0, 2) // Limitar a 2 clases
-            .map(cls => `.${CSS.escape(cls)}`)
-            .join('');
+            .map(cls => CSS.escape(cls))
+            .join(' ');
         if (classes) {
-            selector += classes;
+            selector += `[class="${classes}"]`;
         }
     }
 
