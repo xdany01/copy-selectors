@@ -6,15 +6,17 @@ let includeIds = true;
 let includeAttributes = false;
 let selectorDepth = 10;
 let selectorStrategy = 'full'; // 'full', 'nth-child', 'optimized'
+let modifierKey = 'alt'; // 'alt', 'ctrl', 'shift', 'none'
 
 // Cargar configuración inicial
-chrome.storage.sync.get(["isEnabled", "includeClasses", "includeIds", "includeAttributes", "selectorDepth", "selectorStrategy"], (data) => {
+chrome.storage.sync.get(["isEnabled", "includeClasses", "includeIds", "includeAttributes", "selectorDepth", "selectorStrategy", "modifierKey"], (data) => {
     isExtensionEnabled = data.isEnabled || false;
     includeClasses = data.includeClasses !== undefined ? data.includeClasses : true;
     includeIds = data.includeIds !== undefined ? data.includeIds : true;
     includeAttributes = data.includeAttributes !== undefined ? data.includeAttributes : false;
     selectorDepth = data.selectorDepth !== undefined ? data.selectorDepth : 10;
     selectorStrategy = data.selectorStrategy || 'full';
+    modifierKey = data.modifierKey || 'alt';
 });
 
 // Escuchar cambios en la configuración
@@ -40,6 +42,9 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     if (changes.selectorStrategy) {
         selectorStrategy = changes.selectorStrategy.newValue;
     }
+    if (changes.modifierKey) {
+        modifierKey = changes.modifierKey.newValue;
+    }
 });
 
 // Escuchar mensajes desde el popup
@@ -61,14 +66,28 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "updateStrategy") {
         selectorStrategy = request.selectorStrategy;
     }
+    if (request.action === "updateModifierKey") {
+        modifierKey = request.modifierKey;
+    }
 });
+
+// Verifica si la tecla modificadora configurada está activa
+function isModifierActive(event) {
+    switch (modifierKey) {
+        case 'alt': return event.altKey;
+        case 'ctrl': return event.ctrlKey;
+        case 'shift': return event.shiftKey;
+        case 'none': return true;
+        default: return event.altKey;
+    }
+}
 
 // Evento mouseover: Resalta el elemento
 document.addEventListener('mouseover', (event) => {
     if (!isExtensionEnabled) return;
     if (event.target.id === 'selector-copy-toast') return;
 
-    if (event.altKey) {
+    if (isModifierActive(event)) {
         let target = event.target;
 
         if (lastHighlightedElement && lastHighlightedElement !== target) {
@@ -97,7 +116,7 @@ document.addEventListener('mouseout', (event) => {
 document.addEventListener('click', (event) => {
     if (!isExtensionEnabled) return;
 
-    if (event.altKey) {
+    if (isModifierActive(event)) {
         event.preventDefault();
         event.stopPropagation();
 

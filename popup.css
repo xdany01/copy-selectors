@@ -300,6 +300,41 @@ input:checked+.slider:before {
 }
 
 
+/* Modifier Key Control */
+.modifier-control {
+    background-color: rgba(16, 185, 129, 0.05);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.modifier-select {
+    padding: 6px 12px;
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--text-main);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.modifier-select:hover {
+    background-color: rgba(16, 185, 129, 0.25);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.modifier-select:focus {
+    border-color: var(--success);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.modifier-select option {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+}
+
 /* Instructions */
 .instructions {
     text-align: center;

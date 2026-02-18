@@ -9,6 +9,7 @@ document.getElementById('toggleAttributes').addEventListener('change', saveOptio
 document.getElementById('depthDecrease').addEventListener('click', decreaseDepth);
 document.getElementById('depthIncrease').addEventListener('click', increaseDepth);
 document.getElementById('selectorStrategy').addEventListener('change', saveStrategy);
+document.getElementById('modifierKey').addEventListener('change', saveModifierKey);
 
 // Función para guardar el estado principal de activación
 function saveMainToggle() {
@@ -104,6 +105,40 @@ function saveStrategy() {
     });
 }
 
+// Función para guardar la tecla modificadora
+function saveModifierKey() {
+    const modifier = document.getElementById('modifierKey').value;
+
+    chrome.storage.sync.set({ modifierKey: modifier }, () => {
+        updateModifierLabel(modifier);
+        // Enviar mensaje al script de contenido
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            if (tabs[0]) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    action: "updateModifierKey",
+                    modifierKey: modifier
+                });
+            }
+        });
+    });
+}
+
+// Actualiza la etiqueta de la instrucción según la tecla seleccionada
+function updateModifierLabel(modifier) {
+    const label = document.getElementById('modifierKeyLabel');
+    const instructionText = document.getElementById('instructionText');
+    const keyLabels = { alt: 'Alt', ctrl: 'Ctrl', shift: 'Shift', none: null };
+    const keyName = keyLabels[modifier];
+
+    if (keyName) {
+        label.textContent = keyName;
+        label.style.display = '';
+        instructionText.innerHTML = `Mantén <span class="key" id="modifierKeyLabel">${keyName}</span> + <span class="mouse">Clic</span> para copiar el selector.`;
+    } else {
+        instructionText.innerHTML = `Haz <span class="mouse">Clic</span> para copiar el selector.`;
+    }
+}
+
 // Restaurar el estado guardado al abrir el popup
 function restoreOptions() {
     chrome.storage.sync.get({
@@ -112,7 +147,8 @@ function restoreOptions() {
         includeClasses: true,
         includeAttributes: false,
         selectorDepth: 10,
-        selectorStrategy: 'full'
+        selectorStrategy: 'full',
+        modifierKey: 'alt'
     }, (items) => {
         document.getElementById('toggleExtension').checked = items.isEnabled;
         document.getElementById('toggleIds').checked = items.includeIds;
@@ -120,6 +156,8 @@ function restoreOptions() {
         document.getElementById('toggleAttributes').checked = items.includeAttributes;
         document.getElementById('depthValue').textContent = items.selectorDepth;
         document.getElementById('selectorStrategy').value = items.selectorStrategy;
+        document.getElementById('modifierKey').value = items.modifierKey;
+        updateModifierLabel(items.modifierKey);
 
         updateStatusUI(items.isEnabled);
     });

@@ -94,12 +94,25 @@
                         <option value="optimized" title="Selector único más corto posible">Optimizado</option>
                     </select>
                 </div>
+
+                <div class="option-item modifier-control">
+                    <div class="option-info">
+                        <span class="option-label">Tecla activadora</span>
+                        <span class="option-description">Tecla + Clic para copiar</span>
+                    </div>
+                    <select id="modifierKey" class="modifier-select">
+                        <option value="alt">Alt</option>
+                        <option value="ctrl">Ctrl</option>
+                        <option value="shift">Shift</option>
+                        <option value="none">Ninguna</option>
+                    </select>
+                </div>
             </div>
 
             <div class="divider"></div>
 
             <div class="instructions">
-                <p>Mantén <span class="key">Alt</span> + <span class="mouse">Clic</span> para copiar el selector.</p>
+                <p id="instructionText">Mantén <span class="key" id="modifierKeyLabel">Alt</span> + <span class="mouse">Clic</span> para copiar el selector.</p>
                 <p class="sub-instruction">El selector se genera desde <code>&lt;main&gt;</code> o
                     <code>&lt;body&gt;</code>
                 </p>
