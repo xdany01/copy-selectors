@@ -29,6 +29,8 @@ Extensión de Chrome que te permite copiar selectores CSS completos desde el ele
 
 ## 🎯 Uso
 
+<img title="" src="./images/animation.gif" alt="" data-align="center">
+
 1. Haz clic en el ícono de la extensión en la barra de herramientas
 2. Activa la extensión con el switch principal
 3. Selecciona la estrategia de generación:
@@ -48,33 +50,41 @@ Extensión de Chrome que te permite copiar selectores CSS completos desde el ele
 ## 📋 Ejemplo de Selectores Generados
 
 ### Estrategia: Completo
+
 Con todas las opciones activadas:
+
 ```css
 body > main[id="main-content"][class="container wrapper"] > section[class="hero-section"][data-section="intro"] > div[class="content text-center"]
 ```
 
 Solo con Tags e IDs:
+
 ```css
 body > main[id="main-content"] > section > div
 ```
 
 ### Estrategia: Nth-child
+
 ```css
 body > main:nth-of-type(1) > section:nth-of-type(2) > div:nth-child(3)
 ```
 
 ### Estrategia: Optimizado
+
 Si el elemento tiene ID único:
+
 ```css
 #unique-element-id
 ```
 
 Si tiene clase única:
+
 ```css
 div.unique-class
 ```
 
 Con contexto mínimo:
+
 ```css
 main > section[class="hero-section"] > div:nth-of-type(1)
 ```
@@ -121,15 +131,18 @@ css-selector-copy/
 ## 🐛 Solución de Problemas
 
 **La extensión no funciona:**
+
 - Asegúrate de que esté activada en el popup
 - Recarga la página web después de activarla
 - Verifica que estés manteniendo presionada la tecla Alt
 
 **No puedo ver el ícono:**
+
 - Asegúrate de tener un archivo `icon.png` en la carpeta `images/`
 - Recarga la extensión desde `chrome://extensions/`
 
 **El selector no se copia:**
+
 - Verifica los permisos del portapapeles en Chrome
 - Prueba en una página diferente (algunas páginas bloquean el acceso al portapapeles)
 
@@ -143,6 +156,7 @@ css-selector-copy/
 ## 🤝 Contribuciones
 
 Las contribuciones son bienvenidas. Para cambios importantes:
+
 1. Abre un issue primero para discutir los cambios
 2. Haz fork del proyecto
 3. Crea una rama para tu feature
