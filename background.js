@@ -41,7 +41,7 @@ chrome.storage.sync.get(["isEnabled"], (data) => {
 
 // Función para actualizar el badge
 function updateBadge(isEnabled) {
-    chrome.action.setBadgeText({ text: isEnabled ? "ON" : "OFF" });
+    chrome.action.setBadgeText({ text: isEnabled ? "✓" : "✕" });
     chrome.action.setBadgeBackgroundColor({
         color: isEnabled ? "#00E676" : "#FF5252"
     });
