@@ -18,6 +18,9 @@ function saveMainToggle() {
     chrome.storage.sync.set({ isEnabled: isEnabled }, () => {
         updateStatusUI(isEnabled);
 
+        // Enviar mensaje al background para actualizar el badge
+        chrome.runtime.sendMessage({ action: "badgeUpdate", isEnabled: isEnabled });
+
         // Enviar mensaje al script de contenido
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             if (tabs[0]) {
