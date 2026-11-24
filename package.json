@@ -1,0 +1,26 @@
+{
+  "name": "copy-selector",
+  "version": "1.0.0",
+  "description": "Copia selectores CSS completos desde el main hasta el elemento objetivo con opciones personalizables.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox"
+  },
+  "private": true,
+  "keywords": [
+    "wxt",
+    "chrome-extension",
+    "web-extension",
+    "css-selector",
+    "copy-selector"
+  ],
+  "devDependencies": {
+    "web-ext": "^10.8.0",
+    "wxt": "^0.21.5"
+  }
+}
